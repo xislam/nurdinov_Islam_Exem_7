@@ -1,0 +1,16 @@
+{% extends 'poll/base.html' %}
+
+{% block menu %}
+
+   <li><a href="{% url 'choice_update' choice.pk %}">Edit</a></li>
+
+   <li><a href="{% url 'choice_delete' choice.pk %}">Delete</a></li>
+
+{% endblock %}
+
+{% block title %}{{ choice.title }}{% endblock %}
+
+{% block content %}
+     <h2>Poll : {{ choice.poll }}</h2>
+    <h1>choice:{{choices.option}}</h1>
+{% endblock %}

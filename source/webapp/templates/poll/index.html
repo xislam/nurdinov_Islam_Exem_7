@@ -1,0 +1,32 @@
+{% extends 'poll/base.html' %}
+
+{% block menu %}
+<a class="navbar-brand" href="{% url 'poll_add' %}">Add Poll</a>
+         <a class="navbar-brand" href="{% url 'create_choice' %}">Add Choice</a>
+    <a class="navbar-brand" href="{% url 'view_choice' %}">Choices</a>
+{% endblock %}
+
+{% block content %}
+<h1>POLLS:</h1>
+<hr/>
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
+{% for issue in issues %}
+<div class="card">
+    <div class="card-body">
+         <p style="display:inline "><a href="{% url 'poll_view' poll.pk %}"><i class="fas fa-book-open"></i></a></p>
+        <p style="display:inline "><a href="{% url 'poll_update' poll.pk %}"><i class="fas fa-file-signature"></i></a></p>
+        <p style="display:inline "><a href="{% url 'poll_delete' poll.pk %}"><i class="fas fa-trash"></i></a></p>
+        <h5 class="card-title" style="display:inline ">poll: {{ poll.question }}</h5>
+        <p class="card-text">Дата создания : {{ poll.created_at }}</p>
+
+    </div>
+</div>
+<h2></h2>
+<hr/>
+{% endfor %}
+      {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
+{% endblock %}

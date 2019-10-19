@@ -1,0 +1,25 @@
+{% extends 'poll/base.html' %}
+{% block menu %}
+   <li><a class="navbar-brand" href="{% url 'create_poll'%}">Add Poll</a></li>
+{% endblock %}
+
+{% block content %}
+   <h1>Polls:</h1>
+   <hr/>
+    <form method="POST" action="{% url "index"  %}">
+        {% csrf_token %}
+
+    {% if is_paginated %}
+            {% include 'partial/pagination.html' %}
+    {% endif %}
+   {% for poll in polls %}
+       <h2>Poll : {{ poll.question }}</h2>
+       <h2>Отвкет : {{ choice.question }}</h2>
+        <h2>дата создания  : {{ poll.created_at }}</h2>
+
+       <a href="{% url 'update_poll' poll.pk %}"><i class="fas fa-file-signature"></i></a>
+       <a href="{% url 'delete_poll' poll.pk %}"><i class="fas fa-trash"></i></a>
+       <a href="{% url 'polls' poll.pk %}"><i class="fas fa-book-open"></i></a>
+       <hr/>
+   {% endfor %}
+{% endblock %}

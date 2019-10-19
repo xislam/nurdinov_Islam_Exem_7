@@ -1,0 +1,17 @@
+{% extends 'poll/base.html' %}
+{% block menu %}
+   <li><a class="navbar-brand" href="{% url 'choice_create'%}">Add Choice</a></li>
+{% endblock %}
+{% block content %}
+   <h1>Choices:</h1>
+   <hr/>
+    <form method="POST" action="{% url "index"%}">
+        {% csrf_token %}
+   {% for choice in choices %}
+       <h2>Poll : {{ choice.poll }}</h2>
+       <h2>Choice : {{ choice.option }}</h2>
+       <a href="{% url 'choice_update' status.pk %}"><i class="fas fa-file-signature"></i></a>
+       <a href="{% url 'choice_delete' status.pk %}"><i class="fas fa-trash"></i></a>
+       <hr/>
+   {% endfor %}
+{% endblock %}
