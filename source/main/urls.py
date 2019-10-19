@@ -18,18 +18,15 @@ from django.urls import path
 
 from webapp.views import *
 
-
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name='index'),
     path('poll/add/', PollCreateView.as_view(), name='poll_add'),
     path('poll/<int:pk>/edit/', PollUpdateView.as_view(), name='poll_update'),
     path('poll/<int:pk>/', PollView.as_view(), name='poll_view'),
+    path('project/<int:pk>/',  PollDetailView.as_view(), name='polls'),
     path('poll/<int:pk>/delete/', PollDeleteView.as_view(), name='poll_delete'),
     path('choice/add/', ChoiceCreateView.as_view(), name='choice_add'),
     path('choice/<int:pk>/edit/', ChoiceUpdateView.as_view(), name='choice_update'),
-    path('choice/<int:pk>/', ChoiceView.as_view(), name='choice_view'),
     path('choice/<int:pk>/delete/', ChoiceDeleteView.as_view(), name='choice_delete'),
 ]

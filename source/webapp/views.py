@@ -24,6 +24,12 @@ class PollView(ListView):
     model = Poll
 
 
+class PollDetailView(DetailView):
+    template_name = 'poll/polls.html'
+    context_object_name = 'poll'
+    model = Poll
+
+
 class PollCreateView(CreateView):
     template_name = 'poll/create_poll.html'
 
@@ -32,7 +38,7 @@ class PollCreateView(CreateView):
     form_class = PollForm
 
     def get_success_url(self):
-        return reverse('poll_view')
+        return reverse('poll_view', kwargs={'pk': self.object.pk})
 
 
 class PollUpdateView(UpdateView):
@@ -42,7 +48,7 @@ class PollUpdateView(UpdateView):
     context_object_name = 'poll'
 
     def get_success_url(self):
-        return reverse('poll_view')
+        return reverse('poll_view', kwargs={'pk': self.object.pk})
 
 
 class PollDeleteView(DeleteView):
@@ -53,19 +59,7 @@ class PollDeleteView(DeleteView):
     page = 'error.html'
 
     def get_success_url(self):
-        return reverse('poll_view')
-
-
-class ChoiceView(ListView):
-    template_name = 'choice/view_choice.html'
-    context_object_name = 'choices'
-    model = Choice
-    ordering = ['created_at']
-    paginate_by = 3
-    paginate_orphans = 1
-
-    def get_queryset(self):
-        return Choice.objects.all().order_by('created_at')
+        return reverse('poll_view', kwargs={'pk': self.object.pk})
 
 
 class ChoiceDetailView(DetailView):
