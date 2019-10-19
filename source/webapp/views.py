@@ -6,14 +6,8 @@ from webapp.forms import *
 
 class IndexView(ListView):
     template_name = 'poll/index.html'
-    context_object_name = 'poll'
+    context_object_name = 'polls'
     model = Poll
-    context_key = 'polls'
-
-    def get_objects(self):
-        return super().get_objects().order_by('-created_at')
-
-    ordering = ['-created_at']
     paginate_by = 5
     paginate_orphans = 1
 
@@ -95,6 +89,17 @@ class ChoiceDeleteView(DeleteView):
     form_class = ChoiceForm
     context_object_name = 'choice'
     page = 'error.html'
+
+    def get_success_url(self):
+        return reverse('view_choice')
+
+
+class ChoicesCreateView(CreateView):
+    template_name = 'choice/create.html'
+
+    model = Choice
+
+    form_class = ChoiceForm
 
     def get_success_url(self):
         return reverse('view_choice')

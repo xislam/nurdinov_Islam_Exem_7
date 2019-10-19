@@ -11,10 +11,10 @@
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}
     {% endif %}
-{% for issue in issues %}
+{% for poll in polls %}
 <div class="card">
     <div class="card-body">
-         <p style="display:inline "><a href="{% url 'poll_view' poll.pk %}"><i class="fas fa-book-open"></i></a></p>
+         <p style="display:inline "><a href="{% url 'polls' poll.pk %}"><i class="fas fa-book-open"></i></a></p>
         <p style="display:inline "><a href="{% url 'poll_update' poll.pk %}"><i class="fas fa-file-signature"></i></a></p>
         <p style="display:inline "><a href="{% url 'poll_delete' poll.pk %}"><i class="fas fa-trash"></i></a></p>
         <h5 class="card-title" style="display:inline ">poll: {{ poll.question }}</h5>
